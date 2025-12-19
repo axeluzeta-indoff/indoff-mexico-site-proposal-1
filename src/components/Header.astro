@@ -1,0 +1,75 @@
+---
+const underline =
+  "absolute left-0 right-0 -bottom-2 mx-auto h-[4px] w-full rounded bg-[#EEC028] opacity-0 transition-opacity duration-150 group-hover:opacity-100";
+---
+
+<header class="sticky top-0 z-50 bg-[#169061] text-white">
+  <div class="mx-auto max-w-7xl px-6">
+    <div class="flex h-16 items-center justify-between">
+
+      <!-- Logo -->
+      <a href="/" class="flex items-center">
+        <img
+          src="/images/brands/logo-indoff.png"
+          alt="Indoff México - Material Handling"
+          class="h-12 w-auto"
+          loading="eager"
+        />
+      </a>
+
+      <!-- Navegación -->
+      <nav class="hidden items-center gap-10 md:flex">
+
+        <!-- Soluciones (dropdown) -->
+        <div class="relative group">
+          <a
+            href="#soluciones"
+            class="relative px-2 py-1 font-semibold text-white"
+          >
+            Soluciones
+            <span class={underline}></span>
+          </a>
+
+          <!-- Hover bridge (evita pérdida de hover) -->
+          <div class="absolute left-0 top-full h-4 w-64"></div>
+
+          <!-- Dropdown -->
+          <div
+            class="invisible absolute left-0 top-full z-50 mt-4 w-64 rounded-md bg-[#134c3a] py-4 opacity-0 shadow-lg transition
+                   group-hover:visible group-hover:opacity-100"
+          >
+            <ul class="flex flex-col gap-1 px-5 text-sm text-white">
+              <li><a href="#estanteria" class="block rounded px-2 py-2 hover:bg-white/10">Estantería</a></li>
+              <li><a href="#gruas" class="block rounded px-2 py-2 hover:bg-white/10">Grúas</a></li>
+              <li><a href="#transportadores" class="block rounded px-2 py-2 hover:bg-white/10">Transportadores</a></li>
+              <li><a href="#mesas-elevadoras" class="block rounded px-2 py-2 hover:bg-white/10">Mesas elevadoras</a></li>
+              <li><a href="#contenedores" class="block rounded px-2 py-2 hover:bg-white/10">Contenedores</a></li>
+              <li><a href="#andenes" class="block rounded px-2 py-2 hover:bg-white/10">Andenes</a></li>
+              <li><a href="#integraciones" class="block rounded px-2 py-2 hover:bg-white/10">Integraciones</a></li>
+              <li><a href="#inspecciones" class="block rounded px-2 py-2 hover:bg-white/10">Inspecciones</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Nosotros -->
+        <a href="#nosotros" class="group relative px-2 py-1 font-semibold text-white">
+          Nosotros
+          <span class={underline}></span>
+        </a>
+
+        <!-- Blog -->
+        <a href="#blog" class="group relative px-2 py-1 font-semibold text-white">
+          Blog
+          <span class={underline}></span>
+        </a>
+
+        <!-- Contacto -->
+        <a href="#contacto" class="group relative px-2 py-1 font-semibold text-white">
+          Contacto
+          <span class={underline}></span>
+        </a>
+
+      </nav>
+    </div>
+  </div>
+</header>

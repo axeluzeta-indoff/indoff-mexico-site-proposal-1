@@ -1,0 +1,87 @@
+---
+import MainLayout from "../../../layouts/MainLayout.astro";
+import ProductCard from "../../../components/ProductCard.astro";
+
+import { SOLUTIONS, getSolutionBySlug } from "../../../data/solutions";
+import { getProductsBySolutionSlug } from "../../../data/solutionsProducts";
+
+// Astro ejecuta esto en build
+export function getStaticPaths() {
+  return SOLUTIONS.map((s) => ({
+    params: { solutionSlug: s.slug },
+    props: { s },
+  }));
+}
+
+const { s } = Astro.props;
+
+// Fallback defensivo
+const current = getSolutionBySlug(s.slug) ?? s;
+
+// Hero y texto
+const heroImg = current.heroImg ?? "/images/hero/warehouse-hero.jpg";
+const subtitle =
+  current.subtitle ??
+  "Agiliza tu producción, con un sistema de almacenamiento más productivo, ahorra y aprovecha todo el espacio.";
+
+// Productos por solución
+const products = getProductsBySolutionSlug(current.slug);
+---
+
+<MainLayout title={`${current.title} | Indoff México`} description={current.description}>
+  <!-- HERO -->
+  <section class="relative">
+    <div class="h-55 w-full overflow-hidden bg-black">
+      <img
+        src={heroImg}
+        alt={`Solución de ${current.title}`}
+        class="h-full w-full object-cover opacity-55"
+        loading="eager"
+      />
+    </div>
+
+    <div class="absolute inset-0 grid place-items-center px-6">
+      <h1 class="text-center text-4xl font-extrabold tracking-tight text-white md:text-5xl">
+        {current.title}
+      </h1>
+    </div>
+  </section>
+
+  <!-- CONTENIDO -->
+  <section class="bg-white text-gray-900">
+    <div class="mx-auto max-w-7xl px-6 py-16">
+      <p class="mx-auto max-w-3xl text-center text-xl font-semibold leading-relaxed text-gray-900">
+        {subtitle}
+      </p>
+
+      <!-- PRODUCTOS -->
+      {products.length > 0 ? (
+        <div class="mt-14 grid gap-10 sm:grid-cols-2 lg:grid-cols-5">
+          {products.map((p) => (
+            <ProductCard
+              title={p.title}
+              img={p.img}
+              imgAlt={p.imgAlt}
+              href={`/soluciones/${current.slug}/${p.slug}`}
+            />
+          ))}
+        </div>
+      ) : (
+        <p class="mt-14 text-center text-lg font-semibold text-gray-700">
+          Próximamente.
+        </p>
+      )}
+
+      <!-- CTA -->
+      <div class="mt-16 flex justify-center">
+        <a
+          href="/#contacto"
+          class="inline-flex min-w-70 items-center justify-center rounded-md bg-[#169061] px-10 py-3 text-lg font-extrabold text-white transition hover:bg-[#137e55]"
+        >
+          Cotizar
+        </a>
+      </div>
+    </div>
+  </section>
+</MainLayout>
+

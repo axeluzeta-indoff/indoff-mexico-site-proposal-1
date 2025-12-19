@@ -1,0 +1,77 @@
+---
+const posts = [
+  {
+    title: "Título 1",
+    excerpt:
+      "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.",
+    href: "#",
+    imgSrc: "/images/blog/blog-1.jpeg",
+    imgAlt: "Artículo sobre soluciones de manejo de materiales",
+  },
+  {
+    title: "Título 2",
+    excerpt:
+      "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.",
+    href: "#",
+    imgSrc: "/images/blog/blog-2.jpeg",
+    imgAlt: "Automatización industrial en almacenes",
+  },
+  {
+    title: "Título 3",
+    excerpt:
+      "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.",
+    href: "#",
+    imgSrc: "/images/blog/blog-3.jpeg",
+    imgAlt: "Seguridad industrial y eficiencia operativa",
+  },
+];
+---
+
+<section id="blog" class="bg-white text-gray-900">
+  <div class="mx-auto max-w-7xl px-6 py-20">
+    <h2 class="text-center text-5xl font-extrabold tracking-tight text-[#169061]">
+      Blog
+    </h2>
+
+    <div class="mt-14 grid gap-12 lg:grid-cols-3">
+      {posts.map((post) => (
+        <a
+          href={post.href}
+          class="group block rounded-[28px] bg-[#d9d7cf] p-8 shadow-sm transition
+                 hover:bg-[#169061] hover:shadow-lg"
+        >
+          <!-- Imagen -->
+          <div class="overflow-hidden rounded-[22px] bg-gray-200">
+            <div class="aspect-4/3 w-full">
+              <img
+                src={post.imgSrc}
+                alt={post.imgAlt}
+                class="h-full w-full object-cover transition-transform duration-300
+                       group-hover:scale-105"
+                loading="lazy"
+              />
+            </div>
+          </div>
+
+          <!-- Contenido -->
+          <div class="pt-6 text-center transition-colors group-hover:text-white">
+            <h3 class="text-xl font-extrabold">
+              {post.title}
+            </h3>
+
+            <p class="mt-4 text-base leading-relaxed opacity-80">
+              {post.excerpt}
+            </p>
+
+            <span
+              class="mt-6 inline-block font-medium underline underline-offset-4
+                     decoration-current opacity-90"
+            >
+              Ver más
+            </span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>

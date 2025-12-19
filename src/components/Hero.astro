@@ -1,0 +1,182 @@
+---
+import LogoCarousel from "./LogoCarousel.astro";
+---
+
+<section class="bg-white text-gray-900">
+  <div class="mx-auto max-w-7xl px-6 py-16">
+    <div class="grid items-start gap-12 lg:grid-cols-2">
+
+      <!-- Imagen -->
+      <div class="w-full">
+        <div class="aspect-4/5 w-full overflow-hidden rounded-xl">
+          <img
+            src="/images/hero/warehouse-hero.jpg"
+            alt="Planta industrial con sistemas de manejo de materiales"
+            class="h-full w-full object-cover"
+            loading="eager"
+            fetchpriority="high"
+          />
+        </div>
+      </div>
+
+      <!-- Contenido -->
+      <div class="space-y-8">
+        <div>
+          <h1 class="text-4xl font-extrabold tracking-tight text-[#169061] md:text-5xl">
+            Expertos en Manejo de Materiales
+          </h1>
+          <p class="mt-4 max-w-xl text-lg text-gray-700">
+            Con más de 31 años en México, nos especializamos en la implementación
+            de proyectos de integración de ingeniería en el área de manejo de materiales.
+          </p>
+        </div>
+
+        <!-- Caja amarilla -->
+        <div class="rounded-lg bg-[#EEC028] p-6">
+            <p class="mb-4 text-xl font-extrabold tracking-tight text-gray-900">
+            Te apoyamos en:
+            </p>
+
+
+            <ul class="space-y-2 text-gray-900">
+                <li class="flex items-start gap-2">
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="mt-1 h-5 w-5 text-[#169061]"
+                    aria-hidden="true"
+                >
+                    <path d="M20 6 9 17l-5-5" />
+                </svg>
+                <span>Apertura de plantas nuevas.</span>
+                </li>
+
+                <li class="flex items-start gap-2">
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="mt-1 h-5 w-5 text-[#169061]"
+                    aria-hidden="true"
+                >
+                    <path d="M20 6 9 17l-5-5" />
+                </svg>
+                <span>Aumento de demanda.</span>
+                </li>
+
+                <li class="flex items-start gap-2">
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="mt-1 h-5 w-5 text-[#169061]"
+                    aria-hidden="true"
+                >
+                    <path d="M20 6 9 17l-5-5" />
+                </svg>
+                <span>Proyectos de mejora continua.</span>
+                </li>
+
+                <li class="flex items-start gap-2">
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="mt-1 h-5 w-5 text-[#169061]"
+                    aria-hidden="true"
+                >
+                    <path d="M20 6 9 17l-5-5" />
+                </svg>
+                <span>Evaluaciones de seguridad industrial.</span>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Contacto -->
+        <div class="space-y-3">
+          <p class="text-xl font-black tracking-tight text-[#169061]">
+            Contáctanos
+          </p>
+
+
+          <p class="flex items-center gap-2 text-gray-700">
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="h-5 w-5 text-[#169061]"
+                aria-hidden="true"
+            >
+                <path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/>
+            </svg>
+
+            <a href="tel:+526646251114" class="hover:underline">
+                (664) 625 1114
+            </a>
+        </p>
+
+
+          <p class="flex items-center gap-2 text-gray-700">
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="h-5 w-5 text-[#169061]"
+                aria-hidden="true"
+            >
+                <path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"/>
+                <rect x="2" y="4" width="20" height="16" rx="2"/>
+            </svg>
+
+            <a href="mailto:mexico@indoff.com" class="hover:underline">
+                mexico@indoff.com
+            </a>
+        </p>
+
+
+          <a
+            href="#contacto"
+            class="inline-flex items-center rounded-lg bg-[#169061] px-8 py-4 text-lg font-extrabold tracking-tight text-white transition hover:bg-[#137e55]"
+            >
+            Hablar con un experto
+         </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Marcas -->
+    <div class="mt-20">
+      <p class="mb-6 text-center text-xl font-extrabold tracking-tight text-gray-900">
+        Representantes Autorizados de Fábrica
+     </p>
+
+      <!-- Aquí va el carrusel -->
+      <LogoCarousel />
+    </div>
+  </div>
+</section>

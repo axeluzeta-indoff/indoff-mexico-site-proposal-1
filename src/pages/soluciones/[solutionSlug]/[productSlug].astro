@@ -1,0 +1,128 @@
+---
+import MainLayout from "../../../layouts/MainLayout.astro";
+import ProductGallery from "../../../components/ProductGallery.astro";
+
+import {
+  getAllProductPaths,
+  getProductBySlugs,
+  getProductsBySolutionSlug,
+} from "../../../data/solutionsProducts";
+import { getSolutionBySlug } from "../../../data/solutions";
+
+// requerido por Astro para rutas dinámicas
+export function getStaticPaths() {
+  return getAllProductPaths();
+}
+
+const { solutionSlug, productSlug } = Astro.params;
+
+const solution = getSolutionBySlug(solutionSlug);
+const product = getProductBySlugs(solutionSlug, productSlug);
+
+// productos hermanos (misma categoría)
+const siblings = getProductsBySolutionSlug(solutionSlug);
+---
+
+<MainLayout
+  title={`${product?.title ?? "Producto"} | Indoff México`}
+  description={
+    product?.description?.slice(0, 160) ??
+    solution?.description ??
+    "Producto"
+  }
+>
+  <section class="bg-white text-gray-900">
+    <div class="mx-auto max-w-7xl px-6 py-12">
+      <!-- Breadcrumb -->
+      <p class="text-sm font-semibold text-gray-600">
+        Soluciones / {solutionSlug} / {productSlug}
+      </p>
+
+      <div class="mt-6 grid gap-10 lg:grid-cols-2 lg:items-start">
+        <!-- LEFT: imagen grande + lista -->
+        <div>
+          <!-- Imagen principal -->
+          <div class="overflow-hidden rounded-[28px] bg-gray-200">
+            <div class="aspect-4/3 w-full">
+              <img
+                id="product-main"
+                src={product?.img ?? "/images/hero/warehouse-hero.jpg"}
+                alt={product?.imgAlt ?? "Producto"}
+                class="h-full w-full object-cover"
+                loading="eager"
+              />
+            </div>
+          </div>
+
+          <!-- Lista de otros productos -->
+          <nav class="mt-10">
+            <ul class="space-y-4">
+              {siblings.map((p) => {
+                const isActive = p.slug === productSlug;
+
+                return (
+                  <li>
+                    <a
+                      href={`/soluciones/${solutionSlug}/${p.slug}`}
+                      class={`block text-center text-2xl font-extrabold transition ${
+                        isActive
+                          ? "text-[#169061]"
+                          : "text-gray-900 hover:text-[#169061]"
+                      }`}
+                    >
+                      {p.title}
+                      <div
+                        class={`mx-auto mt-3 h-0.5 w-72 ${
+                          isActive
+                            ? "bg-[#169061]"
+                            : "bg-[#169061]/50"
+                        }`}
+                      />
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
+          </nav>
+        </div>
+
+        <!-- RIGHT: titulo + descripción + galería + CTA -->
+        <div>
+          <h1 class="text-5xl font-extrabold tracking-tight text-[#169061]">
+            {product?.title ?? "Producto"}
+          </h1>
+
+          <div class="mt-6 space-y-6 text-xl font-medium leading-relaxed text-gray-900">
+            {(product?.description ?? "Descripción pendiente.")
+              .split("\n\n")
+              .map((para) => (
+                <p>{para}</p>
+              ))}
+          </div>
+
+          <!-- GALERÍA debajo de la descripción -->
+          {product && (
+            <ProductGallery
+              title={product.title}
+              coverSrc={product.img}
+              coverAlt={product.imgAlt ?? product.title}
+              gallery={product.gallery ?? []}
+              mode="thumbsOnly"
+              mainImgId="product-main"
+            />
+          )}
+
+          <!-- CTA -->
+          <div class="mt-10 flex justify-center lg:justify-start">
+            <a
+              href="/#contacto"
+              class="inline-flex min-w-80 items-center justify-center rounded-md bg-[#169061] px-10 py-4 text-xl font-extrabold text-white transition hover:bg-[#137e55]"
+            >
+              Cotizar
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</MainLayout>

@@ -1,0 +1,41 @@
+<section class="mt-10 overflow-hidden">
+  <div class="relative">
+    <div class="flex w-max animate-logo-scroll gap-12">
+      {[
+        "hero-gorbel.svg",
+        "hero-lewis.png",
+        "hero-mecalux.svg",
+        "hero-orbis.png",
+        "hero-presto.png",
+        "hero-quantum.png",
+        "hero-roach.png",
+        "hero-southworth.svg",
+      ].map((logo) => (
+        <img
+          src={`/images/hero/${logo}`}
+          alt="Marca representada por Indoff"
+          class="h-10 w-auto opacity-80 grayscale hover:grayscale-0 hover:opacity-100 transition"
+          loading="lazy"
+        />
+      ))}
+
+      {[
+        "hero-gorbel.svg",
+        "hero-lewis.png",
+        "hero-mecalux.svg",
+        "hero-orbis.png",
+        "hero-presto.png",
+        "hero-quantum.png",
+        "hero-roach.png",
+        "hero-southworth.svg",
+      ].map((logo) => (
+        <img
+          src={`/images/hero/${logo}`}
+          alt=""
+          class="h-12 w-auto opacity-80 grayscale"
+          aria-hidden="true"
+        />
+      ))}
+    </div>
+  </div>
+</section>

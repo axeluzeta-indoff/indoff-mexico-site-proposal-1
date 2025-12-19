@@ -1,0 +1,151 @@
+---
+type GalleryItem = { src: string; alt: string };
+
+type Props = {
+  title: string;
+  coverSrc: string;
+  coverAlt: string;
+  gallery?: GalleryItem[];
+
+  /**
+   * "full": main + thumbs
+   * "thumbsOnly": solo thumbs (actualiza main por id si lo pasas)
+   * "mainOnly": solo imagen principal
+   */
+  mode?: "full" | "thumbsOnly" | "mainOnly";
+
+  /**
+   * Si mode="thumbsOnly", puedes pasar el id del <img> principal
+   * para que al click se actualice esa imagen.
+   */
+  mainImgId?: string;
+};
+
+const {
+  title,
+  coverSrc,
+  coverAlt,
+  gallery = [],
+  mode = "full",
+  mainImgId,
+} = Astro.props;
+
+// Siempre incluimos portada como primera
+const items: GalleryItem[] = [
+  { src: coverSrc, alt: coverAlt || title },
+  ...gallery.filter((g) => g.src !== coverSrc),
+];
+
+const visible = items.slice(0, 4);
+---
+
+<div class="mt-10" data-gallery data-mode={mode} data-main-id={mainImgId ?? ""}>
+  <!-- MAIN -->
+  {(mode === "full" || mode === "mainOnly") && (
+    <div class="overflow-hidden rounded-[28px] bg-gray-200">
+      <div class="aspect-4/3 w-full">
+        <img
+          data-gallery-main
+          src={items[0]?.src}
+          alt={items[0]?.alt}
+          class="h-full w-full object-cover"
+          loading="eager"
+        />
+      </div>
+    </div>
+  )}
+
+  <!-- THUMBS -->
+  {(mode === "full" || mode === "thumbsOnly") && visible.length > 0 && (
+    <div class={mode === "thumbsOnly" ? "" : "mt-8"}>
+      <div class="grid grid-cols-4 gap-6">
+        {visible.map((t, idx) => (
+          <button
+            type="button"
+            class={`group block overflow-hidden rounded-[22px] bg-gray-200 outline-none transition
+              ${idx === 0 ? "ring-4 ring-[#169061]" : "ring-0"}
+              focus:ring-4 focus:ring-[#169061]
+            `}
+            data-gallery-thumb
+            data-src={t.src}
+            data-alt={t.alt}
+            data-index={idx}
+            aria-label={`Ver imagen ${idx + 1}: ${t.alt}`}
+          >
+            <div class="aspect-4/3 w-full">
+              <img
+                src={t.src}
+                alt={t.alt}
+                class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                loading="lazy"
+              />
+            </div>
+          </button>
+        ))}
+      </div>
+
+      <!-- Dots -->
+      <div class="mt-6 flex items-center justify-center gap-3" data-gallery-dots>
+        {visible.map((_, idx) => (
+          <span
+            class={`h-3 w-3 rounded-full ${idx === 0 ? "bg-[#169061]" : "bg-gray-300"}`}
+            data-dot={idx}
+          />
+        ))}
+      </div>
+    </div>
+  )}
+</div>
+
+<script>
+  document.querySelectorAll("[data-gallery]").forEach((root) => {
+    const mode = root.getAttribute("data-mode") || "full";
+    const mainId = root.getAttribute("data-main-id") || "";
+    const localMain = root.querySelector("[data-gallery-main]");
+    const thumbs = Array.from(root.querySelectorAll("[data-gallery-thumb]"));
+    const dotsRoot = root.querySelector("[data-gallery-dots]");
+
+    const getMain = () => {
+      if (mode === "thumbsOnly" && mainId) {
+        const external = document.getElementById(mainId);
+        if (external) return external;
+      }
+      return localMain;
+    };
+
+    const mainImg = getMain();
+    if (!mainImg || thumbs.length === 0) return;
+
+    const setActive = (index:any) => {
+      thumbs.forEach((btn, i) => {
+        if (i === index) {
+          btn.classList.add("ring-4", "ring-[#169061]");
+          btn.classList.remove("ring-0");
+        } else {
+          btn.classList.remove("ring-4", "ring-[#169061]");
+          btn.classList.add("ring-0");
+        }
+      });
+
+      if (dotsRoot) {
+        const dots = Array.from(dotsRoot.querySelectorAll("[data-dot]"));
+        dots.forEach((dot, i) => {
+          dot.classList.toggle("bg-[#169061]", i === index);
+          dot.classList.toggle("bg-gray-300", i !== index);
+        });
+      }
+    };
+
+    thumbs.forEach((btn, index) => {
+      btn.addEventListener("click", () => {
+        const src = btn.getAttribute("data-src");
+        const alt = btn.getAttribute("data-alt") || "Producto";
+        if (!src) return;
+
+        mainImg.setAttribute("src", src);
+        mainImg.setAttribute("alt", alt);
+        setActive(index);
+      });
+    });
+  });
+</script>

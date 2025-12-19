@@ -1,0 +1,97 @@
+---
+const items = [
+  {
+    title: "Estantería",
+    slug: "estanterias",
+    img: "/images/solutions/solutions-estanterias.jpg",
+    imgAlt: "Sistemas de estantería industrial",
+  },
+  {
+    title: "Grúas",
+    slug: "gruas",
+    img: "/images/solutions/solutions-gruas.jpeg",
+    imgAlt: "Grúas industriales",
+  },
+  {
+    title: "Transportadores",
+    slug: "transportadores",
+    img: "/images/solutions/solutions-transportadores.jpeg",
+    imgAlt: "Sistemas de transportadores",
+  },
+  {
+    title: "Mesas Elevadoras",
+    slug: "mesas-elevadoras",
+    img: "/images/solutions/solutions-mesas.jpg",
+    imgAlt: "Mesas elevadoras industriales",
+  },
+  {
+    title: "Contenedores",
+    slug: "contenedores",
+    img: "/images/solutions/solutions-contenedores.jpeg",
+    imgAlt: "Contenedores industriales",
+  },
+  {
+    title: "Andenes",
+    slug: "andenes",
+    img: "/images/solutions/solutions-andenes.jpeg",
+    imgAlt: "Andenes de carga",
+  },
+  {
+    title: "Integraciones",
+    slug: "integraciones",
+    img: "/images/solutions/solutions-integraciones.jpeg",
+    imgAlt: "Integración de sistemas industriales",
+  },
+  {
+    title: "Inspecciones",
+    slug: "inspecciones",
+    img: "/images/solutions/solutions-inspecciones.jpeg",
+    imgAlt: "Inspecciones de seguridad industrial",
+  },
+];
+---
+
+<section id="soluciones" class="bg-white text-gray-900">
+  <div class="mx-auto max-w-7xl px-6 py-20">
+    <h2 class="text-center text-5xl font-extrabold tracking-tight text-[#169061]">
+      Soluciones
+    </h2>
+
+    <div class="mt-14 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+      {items.map((item) => (
+        <a
+          href={`/soluciones/${item.slug}`}
+          class="group block rounded-[28px] bg-[#d9d7cf] p-6 shadow-sm transition
+                 hover:-translate-y-1 hover:bg-[#169061] hover:shadow-lg"
+        >
+          <!-- Imagen -->
+          <div class="overflow-hidden rounded-[22px] bg-gray-200">
+            <div class="aspect-4/3 w-full">
+              <img
+                src={item.img}
+                alt={item.imgAlt}
+                class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                loading="lazy"
+              />
+            </div>
+          </div>
+
+          <!-- Texto -->
+          <div class="pt-6 text-center transition-colors">
+            <h3 class="text-xl font-extrabold text-gray-900 group-hover:text-white">
+              {item.title}
+            </h3>
+
+            <span
+              class="mt-2 inline-block text-base font-medium text-gray-900 underline
+                     decoration-gray-900/40 underline-offset-4
+                     group-hover:text-white group-hover:decoration-white"
+            >
+              Ver más
+            </span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>

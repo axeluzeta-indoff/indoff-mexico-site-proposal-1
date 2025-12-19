@@ -1,0 +1,45 @@
+---
+type Props = {
+  title: string;
+  img: string;
+  imgAlt: string;
+  href?: string; // opcional por ahora
+};
+
+const { title, img, imgAlt, href = "#" } = Astro.props;
+---
+
+<a
+  href={href}
+  class="group block rounded-[28px] bg-[#d9d7cf] p-6 shadow-sm transition
+         hover:-translate-y-1 hover:bg-[#169061] hover:shadow-lg"
+>
+  <!-- Imagen -->
+  <div class="overflow-hidden rounded-[22px] bg-gray-200">
+    <div class="aspect-square w-full">
+      <img
+        src={img}
+        alt={imgAlt}
+        class="h-full w-full object-cover transition-transform duration-300
+               group-hover:scale-105"
+        loading="lazy"
+      />
+    </div>
+  </div>
+
+  <!-- Texto -->
+  <div class="pt-6 text-center transition-colors">
+    <h3 class="text-xl font-extrabold text-gray-900 group-hover:text-white">
+      {title}
+    </h3>
+
+    <span
+      class="mt-2 inline-block text-base font-medium text-gray-900 underline
+             decoration-gray-900/40 underline-offset-4
+             group-hover:text-white group-hover:decoration-white"
+    >
+      Ver más
+    </span>
+  </div>
+</a>
+
