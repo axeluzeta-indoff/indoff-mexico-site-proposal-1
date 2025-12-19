@@ -1,0 +1,49 @@
+---
+import MainLayout from "../../layouts/MainLayout.astro";
+import { BLOG_POSTS } from "../../data/blog";
+
+export function getStaticPaths() {
+  return BLOG_POSTS.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+---
+
+<MainLayout title={post.title} description={post.excerpt} canonical={`/blog/${post.slug}`}>
+  <section class="mx-auto max-w-7xl px-6 py-16">
+    <div class="grid gap-12 lg:grid-cols-2 lg:items-start">
+      <!-- Imagen -->
+      <div class="overflow-hidden rounded-[2.5rem] bg-[#d9d7cf] p-6">
+        <img
+          src={post.image}
+          alt={post.title}
+          class="w-full rounded-4xl object-cover"
+          loading="eager"
+        />
+      </div>
+
+      <!-- Contenido -->
+      <div>
+        <h1 class="text-4xl font-extrabold tracking-tight text-[#169061] md:text-5xl">
+          {post.title}
+        </h1>
+
+        <div class="mt-6 space-y-6 text-lg leading-relaxed text-gray-800">
+          {post.content.map((p) => <p>{p}</p>)}
+        </div>
+
+        <div class="mt-10">
+          <a
+            href="/#blog"
+            class="inline-flex items-center font-extrabold text-[#169061] hover:underline"
+          >
+            ← Volver al blog
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</MainLayout>
