@@ -1,41 +1,96 @@
 <section class="mt-10 overflow-hidden">
   <div class="relative">
-    <div class="flex w-max animate-logo-scroll gap-12">
-      {[
-        "hero-gorbel.svg",
-        "hero-lewis.png",
-        "hero-mecalux.svg",
-        "hero-orbis.png",
-        "hero-presto.png",
-        "hero-quantum.png",
-        "hero-roach.png",
-        "hero-southworth.svg",
-      ].map((logo) => (
-        <img
-          src={`/images/hero/${logo}`}
-          alt="Marca representada por Indoff"
-          class="h-10 w-auto opacity-80 grayscale hover:grayscale-0 hover:opacity-100 transition"
-          loading="lazy"
-        />
-      ))}
+    <!-- Wrapper con pause on hover -->
+    <div class="logo-carousel-wrapper group">
+      <div class="flex w-max gap-12">
+        <!-- Primera copia (con interacción) -->
+        {[
+          "hero-gorbel.svg",
+          "hero-lewis.png",
+          "hero-mecalux.svg",
+          "hero-orbis.png",
+          "hero-presto.png",
+          "hero-quantum.png",
+          "hero-roach.png",
+          "hero-southworth.svg",
+        ].map((logo) => (
+          <div class="logo-item flex-shrink-0">
+            <img
+              src={`/images/hero/${logo}`}
+              alt="Marca representada por Indoff"
+              class="h-12 w-auto object-contain"
+              loading="lazy"
+            />
+          </div>
+        ))}
 
-      {[
-        "hero-gorbel.svg",
-        "hero-lewis.png",
-        "hero-mecalux.svg",
-        "hero-orbis.png",
-        "hero-presto.png",
-        "hero-quantum.png",
-        "hero-roach.png",
-        "hero-southworth.svg",
-      ].map((logo) => (
-        <img
-          src={`/images/hero/${logo}`}
-          alt=""
-          class="h-12 w-auto opacity-80 grayscale"
-          aria-hidden="true"
-        />
-      ))}
+        <!-- Segunda copia (duplicado para loop infinito) -->
+        {[
+          "hero-gorbel.svg",
+          "hero-lewis.png",
+          "hero-mecalux.svg",
+          "hero-orbis.png",
+          "hero-presto.png",
+          "hero-quantum.png",
+          "hero-roach.png",
+          "hero-southworth.svg",
+        ].map((logo) => (
+          <div class="logo-item flex-shrink-0" aria-hidden="true">
+            <img
+              src={`/images/hero/${logo}`}
+              alt=""
+              class="h-12 w-auto object-contain"
+            />
+          </div>
+        ))}
+      </div>
     </div>
   </div>
 </section>
+
+<style>
+  .logo-carousel-wrapper {
+    position: relative;
+  }
+
+  .logo-carousel-wrapper > div {
+    animation: logo-scroll 30s linear infinite;
+  }
+
+  /* Pausa la animación al hacer hover en el contenedor */
+  .logo-carousel-wrapper:hover > div {
+    animation-play-state: paused;
+  }
+
+  /* Efecto de hover en logos individuales */
+  .logo-item {
+    transition: all 0.3s ease;
+    position: relative;
+  }
+
+  .logo-item img {
+    filter: grayscale(100%) opacity(0.6);
+    transition: filter 0.3s ease, transform 0.3s ease;
+  }
+
+  .logo-item:hover img {
+    filter: grayscale(0%) opacity(1);
+    transform: scale(1.1);
+  }
+
+  @keyframes logo-scroll {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  /* Mejora para reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .logo-carousel-wrapper > div {
+      animation: none;
+    }
+  }
+</style>

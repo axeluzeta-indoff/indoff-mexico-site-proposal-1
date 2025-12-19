@@ -1,12 +1,11 @@
 ---
 const underline =
-  "absolute left-0 right-0 -bottom-2 mx-auto h-[4px] w-full rounded bg-[#EEC028] opacity-0 transition-opacity duration-150 group-hover:opacity-100";
+  "absolute left-0 right-0 -bottom-1 mx-auto h-[3px] w-full rounded bg-[#EEC028] opacity-0 transition-opacity duration-150 group-hover:opacity-100 group-[.active]:opacity-100";
 ---
 
 <header class="sticky top-0 z-50 bg-[#169061] text-white">
   <div class="mx-auto max-w-7xl px-6">
     <div class="flex h-16 items-center justify-between">
-
       <!-- Logo -->
       <a href="/" class="flex items-center">
         <img
@@ -19,12 +18,12 @@ const underline =
 
       <!-- Navegación -->
       <nav class="hidden items-center gap-10 md:flex">
-
         <!-- Soluciones (dropdown) -->
         <div class="relative group">
           <a
             href="#soluciones"
-            class="relative px-2 py-1 font-semibold text-white"
+            data-navlink
+            class="group relative px-2 py-1 text-[15px] font-bold tracking-wide text-white/90 transition-colors hover:text-white"
           >
             Soluciones
             <span class={underline}></span>
@@ -52,23 +51,34 @@ const underline =
         </div>
 
         <!-- Nosotros -->
-        <a href="#nosotros" class="group relative px-2 py-1 font-semibold text-white">
+        <a
+          href="#nosotros"
+          data-navlink
+          class="group relative px-2 py-1 text-[15px] font-bold tracking-wide text-white/90 transition-colors hover:text-white"
+        >
           Nosotros
           <span class={underline}></span>
         </a>
 
         <!-- Blog -->
-        <a href="#blog" class="group relative px-2 py-1 font-semibold text-white">
+        <a
+          href="#blog"
+          data-navlink
+          class="group relative px-2 py-1 text-[15px] font-bold tracking-wide text-white/90 transition-colors hover:text-white"
+        >
           Blog
           <span class={underline}></span>
         </a>
 
         <!-- Contacto -->
-        <a href="#contacto" class="group relative px-2 py-1 font-semibold text-white">
+        <a
+          href="#contacto"
+          data-navlink
+          class="group relative px-2 py-1 text-[15px] font-bold tracking-wide text-white/90 transition-colors hover:text-white"
+        >
           Contacto
           <span class={underline}></span>
         </a>
-
       </nav>
     </div>
   </div>

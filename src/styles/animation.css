@@ -1,0 +1,65 @@
+/* Por defecto: visible (si JS falla, no pasa nada) */
+[data-animate] {
+  opacity: 1;
+  transform: none;
+}
+
+/* Solo si JS está activo, aplicamos estado inicial oculto */
+html.has-anim [data-animate] {
+  opacity: 0;
+  transform: translate3d(0, 12px, 0);
+  transition: opacity 380ms ease, transform 380ms ease;
+  will-change: opacity, transform;
+}
+
+html.has-anim [data-animate].is-in {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+/* Variantes */
+html.has-anim [data-animate="fade"] {
+  transform: none;
+}
+
+html.has-anim [data-animate="scale"] {
+  transform: scale(0.98);
+}
+html.has-anim [data-animate="scale"].is-in {
+  transform: scale(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.has-anim [data-animate] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+/* Default ya lo tienes (fade-up) */
+
+/* Entra desde la izquierda */
+html.has-anim [data-animate="left"] {
+  opacity: 0;
+  transform: translate3d(-24px, 0, 0);
+  transition: opacity 420ms ease, transform 420ms ease;
+  will-change: opacity, transform;
+}
+html.has-anim [data-animate="left"].is-in {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+/* Entra desde la derecha */
+html.has-anim [data-animate="right"] {
+  opacity: 0;
+  transform: translate3d(24px, 0, 0);
+  transition: opacity 420ms ease, transform 420ms ease;
+  will-change: opacity, transform;
+}
+html.has-anim [data-animate="right"].is-in {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
